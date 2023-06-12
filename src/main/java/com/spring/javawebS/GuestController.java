@@ -48,7 +48,6 @@ public class GuestController {
 		model.addAttribute("blockSize", blockSize);
 		model.addAttribute("lastBlock", lastBlock);
 		
-		
 		return "guest/guestList";
 	}
 	
