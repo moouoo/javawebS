@@ -9,7 +9,7 @@ import com.spring.javawebS.dao.GuestDAO;
 import com.spring.javawebS.vo.GuestVO;
 
 @Service
-public class GuestServieImpl implements GuestService {
+public class GuestServiceImpl implements GuestService {
 
 	@Autowired
 	GuestDAO guestDAO;
@@ -34,6 +34,12 @@ public class GuestServieImpl implements GuestService {
 	@Override
 	public int totRecCnt() {
 		return guestDAO.totRecCnt();
+	}
+
+	@Override
+	public int setGuestDelete(int idx) {
+		
+		return guestDAO.setGuestDelete(idx);
 	}
 	
 	

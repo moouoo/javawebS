@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>guestList(블록페이징처리-한페이지분량조정하기-부트스트랩페이지네이션적용).jsp</title>
-  <jsp:include page="/WEB-INF/views/include/bs4.jsp" />
+	<jsp:include page="/WEB-INF/views/include/bs4.jsp" />
   <style>
     th {
       background-color:#eee;
@@ -21,12 +21,12 @@
     
     function pageCheck() {
     	let pageSize = document.getElementById("pageSize").value;
-    	location.href = "${ctp}/guest/guestList?pag=${pag}&pageSize="+pageSize;
+    	location.href = "${ctp}/guest/guestList?pag=${pageVO.pag}&pageSize="+pageSize;
     }
     
     function delCheck(idx) {
     	let ans = confirm("현재 게시물을 삭제하시겠습니까?");
-    	if(ans) location.href = "${ctp}/GuestDelete.gu?idx="+idx;
+    	if(ans) location.href = "${ctp}/guest/guestDelete?idx="+idx;
     }
   </script>
 </head>
@@ -49,23 +49,23 @@
     <tr>
       <td>
         <select name="pageSize" id="pageSize" onchange="pageCheck()">
-          <option <c:if test="${pageSize == 3}">selected</c:if>>3</option>
-          <option <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-          <option <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-          <option <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-          <option <c:if test="${pageSize == 20}">selected</c:if>>20</option>
+          <option <c:if test="${pageVO.pageSize == 3}">selected</c:if>>3</option>
+          <option <c:if test="${pageVO.pageSize == 5}">selected</c:if>>5</option>
+          <option <c:if test="${pageVO.pageSize == 10}">selected</c:if>>10</option>
+          <option <c:if test="${pageVO.pageSize == 15}">selected</c:if>>15</option>
+          <option <c:if test="${pageVO.pageSize == 20}">selected</c:if>>20</option>
         </select> 건
       </td>
       <td class="text-right">
         <!-- 첫페이지 / 이전페이지 / (현재페이지번호/총페이지수) / 다음페이지 / 마지막페이지 -->
-        <c:if test="${pag > 1}">
-          <a href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=1" title="첫페이지로">◁◁</a>
-          <a href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${pag-1}" title="이전페이지로">◀</a>
+        <c:if test="${pageVO.pag > 1}">
+          <a href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=1" title="첫페이지로">◁◁</a>
+          <a href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${pageVO.pag-1}" title="이전페이지로">◀</a>
         </c:if>
-        ${pag}/${totPage}
-        <c:if test="${pag < totPage}">
-          <a href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${pag+1}" title="다음페이지로">▶</a>
-          <a href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${totPage}" title="마지막페이지로">▷▷</a>
+        ${pageVO.pag}/${pageVO.totPage}
+        <c:if test="${pageVO.pag < pageVO.totPage}">
+          <a href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${pageVO.pag+1}" title="다음페이지로">▶</a>
+          <a href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${pageVO.totPage}" title="마지막페이지로">▷▷</a>
         </c:if>
       </td>
     </tr>
@@ -74,7 +74,7 @@
 	  <table class="table table-borderless mb-0 mt-0">
 	    <tr>
 	      <td>
-	        번호 : ${curScrStartNo}
+	        번호 : ${pageVO.curScrStartNo}
 	        <c:if test="${sAdmin == 'adminOk'}">
 	        	<a href="javascript:delCheck(${vo.idx})" class="btn btn-danger btn-sm">삭제</a>
 	        </c:if>
@@ -115,14 +115,14 @@
   <!-- 첫페이지 / 이전블록 / 1(4) 2(5) 3 / 다음블록 / 마지막페이지 -->
   <div class="text-center">
 	  <ul class="pagination justify-content-center">
-	    <c:if test="${pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=1">첫페이지</a></li></c:if>
-	    <c:if test="${curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li></c:if>
-	    <c:forEach var="i" begin="${curBlock*blockSize + 1}" end="${curBlock*blockSize + blockSize}" varStatus="st">
-	      <c:if test="${i <= totPage && i == pag}"><li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
-	      <c:if test="${i <= totPage && i != pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${i}">${i}</a></li></c:if>
+	    <c:if test="${pageVO.pag > 1}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=1">첫페이지</a></li></c:if>
+	    <c:if test="${pageVO.curBlock > 0}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${(pageVO.curBlock-1)*pageVO.blockSize + 1}">이전블록</a></li></c:if>
+	    <c:forEach var="i" begin="${pageVO.curBlock*pageVO.blockSize + 1}" end="${pageVO.curBlock*pageVO.blockSize + pageVO.blockSize}" varStatus="st">
+	      <c:if test="${i <= pageVO.totPage && i == pageVO.pag}"><li class="page-item active"><a class="page-link text-white bg-secondary border-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${i}">${i}</a></li></c:if>
+	      <c:if test="${i <= pageVO.totPage && i != pageVO.pag}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${i}">${i}</a></li></c:if>
 	    </c:forEach>
-	    <c:if test="${curBlock < lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li></c:if>
-	    <c:if test="${pag < totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageSize}&pag=${totPage}">마지막페이지</a></li></c:if>
+	    <c:if test="${pageVO.curBlock < pageVO.lastBlock}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${(pageVO.curBlock+1)*pageVO.blockSize + 1}">다음블록</a></li></c:if>
+	    <c:if test="${pageVO.pag < pageVO.totPage}"><li class="page-item"><a class="page-link text-secondary" href="${ctp}/guest/guestList?pageSize=${pageVO.pageSize}&pag=${pageVO.totPage}">마지막페이지</a></li></c:if>
 	  </ul>
   </div>
 </div>

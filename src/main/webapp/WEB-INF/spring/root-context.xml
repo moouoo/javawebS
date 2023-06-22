@@ -35,5 +35,23 @@
   <!-- 가공처리된 매퍼의 정보를 주입하기위한 DAO객체의 위치를 설정 -->
   <mybatis-spring:scan base-package="com.spring.javawebS.dao"/>
   
+ <!-- 메일서비스(SMTP)에 필요한 환경설정(gmail.com) -->
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  	<property name="host" value="smtp.gmail.com" />
+  	<property name="port" value="587" />
+  	<property name="username" value="cccbbbsss1126@gmail.com" />
+  	<property name="password" value="" /> <!-- 구글의 smtp 비밀번호 발급 받은것 넣기 -->
+  	<property name="javaMailProperties">
+  	  <props>
+  	    <prop key="mail.transport.protocol">smtp</prop>
+  	    <prop key="mail.smtp.starttls.enable">true</prop>
+  	    <prop key="mail.debug">true</prop>
+  	    <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+  	    <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+  	  </props>
+  	</property>
+  </bean>
+	  
+  
   
 </beans>

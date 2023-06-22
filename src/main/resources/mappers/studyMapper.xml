@@ -1,7 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.javawebS.dao.MemberDAO">
-	
-	
-	
+<mapper namespace="com.spring.javawebS.dao.StudyDAO">
+  
+  <select id="getMemberMidSearch" resultType="com.spring.javawebS.vo.MemberVO">
+    select * from member where name = #{name};
+  </select>
+  
+  <select id="getMemberMidSearch2" resultType="com.spring.javawebS.vo.MemberVO">
+    select * from member where name like concat('%',#{name},'%') order by name;
+  </select>
+  
+  <insert id="setUserInput">
+    insert into user values (default,#{vo.mid},#{vo.name},#{vo.age},#{vo.address});
+  </insert>
+  
+  <select id="getUserList" resultType="com.spring.javawebS.vo.UserVO">
+    select * from user order by idx desc;
+  </select>
+  
+  
+  
+  <delete id="setUserDelete">
+    delete from user where idx = #{idx};
+  </delete>
+  
 </mapper>

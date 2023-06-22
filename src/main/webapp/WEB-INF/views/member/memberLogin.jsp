@@ -18,7 +18,7 @@
 	  <div class="modal-content p-4">
 		  <h2 class="text-center">회원 로그인</h2>
 		  <p class="text-center">(회원 아이디와 비밀번호를 입력해 주세요)</p>
-		  <form name="myform" method="post" action="${ctp}/MemberLoginOk.mem" class="was-validated">
+		  <form name="myform" method="post" class="was-validated">
 		    <div class="form-group">
 		      <label for="mid">회원 아이디</label>
 		      <input type="text" class="form-control" name="mid" id="mid" value="${mid}" placeholder="아이디를 입력하세요." required autofocus />
@@ -40,8 +40,8 @@
 		    <div class="row text-center" style="font-size:12px">
 		      <span class="col"><input type="checkbox" name="idSave" checked />아이디 저장</span>
 		      <span class="col">
-		        [<a href="#">아이디찾기</a>] /
-		        [<a href="#">비밀번호찾기</a>]
+		        [<a href="${ctp}/member/memberIdFind">아이디찾기</a>] /
+		        [<a href="${ctp}/member/memberPwdFind">비밀번호찾기</a>]
 		      </span>
 		    </div>
 		  </form>

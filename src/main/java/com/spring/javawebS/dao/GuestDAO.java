@@ -13,6 +13,8 @@ public interface GuestDAO {
 	public List<GuestVO> getGuestList(@Param("startIndexNo") int startIndexNo, @Param("pageSize") int pageSize);
 
 	public int totRecCnt();
+
+	public int setGuestDelete(@Param("idx") int idx);
 	
 	
 }

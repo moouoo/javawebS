@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javawebS.dao.BoardDAO">
+
+  <select id="totRecCnt" resultType="int">
+    select count(*) from board2;
+  </select>
+  
+  <select id="getBoardList" resultType="com.spring.javawebS.vo.BoardVO">
+    select * from board2 order by idx desc limit #{startIndexNo},#{pageSize};
+  </select>
+  
+  <select id="getBoardContent" resultType="com.spring.javawebS.vo.BoardVO">
+    select * from board2 where idx = #{idx};
+  </select>
+  
+  <select id="getPrevNext" resultType="com.spring.javawebS.vo.BoardVO">
+    select idx,title from board2 where idx in (
+		  (select idx from board2 where <![CDATA[idx < #{idx}]]> order by idx desc limit 1),
+		  (select idx from board2 where <![CDATA[idx > #{idx}]]> limit 1));
+  </select>
+   
+  <select id="totRecCntSearch" resultType="int">
+    select count(*) from board2 where ${search} like concat('%',#{searchString},'%');
+  </select>
+  
+  <select id="getBoardListSearch" resultType="com.spring.javawebS.vo.BoardVO">
+    select * from board2 where ${search} like concat('%',#{searchString},'%') order by idx desc limit #{startIndexNo},#{pageSize};
+  </select>
+  
+  <select id="getBoardGoodCheck" resultType="com.spring.javawebS.vo.GoodVO">
+  	select * from good where partIdx=#{partIdx} and part=#{part} and mid=#{mid};
+  </select>
+  
+  <select id="getMaxGroupId" resultType="String">
+  	select max(groupId) from board2Reply where boardIdx = #{boardIdx};
+  </select>
+  
+  <select id="setBoardReply" resultType="com.spring.javawebS.vo.BoardReplyVO">
+  	select * from board2Reply where boardIdx=#{idx} order by groupId, idx;
+  </select>
+  
+  <select id="getBoardReplyIdx" resultType="com.spring.javawebS.vo.BoardReplyVO">
+  	select * from board2Reply where idx=#{replyIdx};
+  </select>
+  
+  
+  
+  <insert id="setBoardInput">
+    insert into board2 values (default,#{vo.mid},#{vo.nickName},#{vo.title},#{vo.email},#{vo.homePage},#{vo.content},default,#{vo.hostIp},#{vo.openSw},default,default);
+  </insert>
+  
+  <insert id="setGoodDBInput">
+    insert into good values (default,#{goodVo.part},#{goodVo.partIdx},#{goodVo.mid});
+  </insert>
+  
+  <insert id="setBoardReplyInput">
+    insert into board2Reply values (default,#{replyVO.boardIdx},#{replyVO.mid},#{replyVO.nickName},default,#{replyVO.hostIp},#{replyVO.content},#{replyVO.groupId},#{replyVO.level});
+  </insert>
+  
+  
+  
+  <update id="setBoardReadNum">
+    update board2 set readNum = readNum + 1 where idx = #{idx};
+  </update>
+  
+  <update id="boardGoodFlagCheck">
+    update board2 set good = good + #{gFlag} where idx = #{idx};
+  </update>
+  
+  <update id="setBoardUpdate">
+    update board2 set title=#{vo.title},email=#{vo.email},homePage=#{vo.homePage},content=#{vo.content},hostIp=#{vo.hostIp},openSw=#{vo.openSw},wDate=now() where idx = #{vo.idx};
+  </update>
+  
+  <update id="setBoardGoodPlus">
+  	update  board2 set good = good + 1 where idx = #{idx};
+  </update>
+  
+  <update id="setGoodPlusMinus">
+  	update  board2 set good = good + #{goodCnt} where idx = #{idx};
+  </update>
+  
+  <update id="setGoodUpdate">
+  	 update  board2 set good = good + #{item}  where idx = #{idx};
+  </update>
+  
+  <update id="setBoardReplyUpdate">
+    update board2Reply set content = #{content}, hostIp = #{hostIp} where idx = #{idx};
+  </update>
+  
+  
+  
+  <delete id="setBoardDelete">
+    delete from board2 where idx = #{idx};
+  </delete>
+  
+  <delete id="setGoodDBDelete">
+    delete from good where idx = #{idx};
+  </delete>
+  
+  <delete id="setBoardReplyDelete">
+    <if test="level >= 1">
+    	delete from board2Reply where idx = #{replyIdx};
+    </if>
+    <if test="level lt 1">
+    	delete from board2Reply where boardIdx=#{boardIdx} and groupId=#{groupId};
+    </if>
+  </delete>
+  
+</mapper>
