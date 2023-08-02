@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.spring.javawebS.pagInation.PageProcess;
-import com.spring.javawebS.pagInation.PageVO;
+import com.spring.javawebS.pagination.PageProcess;
+import com.spring.javawebS.pagination.PageVO;
 import com.spring.javawebS.service.PdsService;
 import com.spring.javawebS.vo.PdsVO;
 
@@ -103,15 +106,16 @@ public class PdsController {
 	}
 	
 	// 전체파일 다운로드하기
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/pdsTotalDown", method = RequestMethod.GET)
-	public String pdsTotalDownGet(int idx, HttpServletRequest request) throws IOException {
-		// 파일 다운로드 횟수 증가
+	public String pdsTotalDownGet(HttpServletRequest request, int idx) throws IOException {
+		// 파일 다운로드횟수 증가
 		pdsService.setPdsDownNumCheck(idx);
 		
-		// 여러개의 파일을 다운로드할 경우 하나의 파일(zip)로 압축(통합?)하여 다운로드 한다. 압축될 파일명은 '제목.zip'으로 처리한다.
+		// 여러개의 파일을 다운로드할 경우 하나의 파일(zip)로 압축(통합?)하여 다운로드한다. 압축될 파일명은 '제목.zip'으로 처리한다.
 		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/pds/");
 		
-		PdsVO vo = pdsService.getPdsIdxSearch(idx); 
+		PdsVO vo = pdsService.getPdsIdxSearch(idx);
 		
 		String[] fNames = vo.getFName().split("/");
 		String[] fSNames = vo.getFSName().split("/");
@@ -151,11 +155,33 @@ public class PdsController {
 		}
 		zout.close();
 		
-		return "";
+		return "redirect:/pds/pdsDownAction?file="+java.net.URLEncoder.encode(zipName);
 	}
 	
-	
-	
-	
-	
+	@RequestMapping(value = "/pdsDownAction", method = RequestMethod.GET)
+	public void pdsDownActionGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String file = request.getParameter("file");
+		
+		String downPathFile = request.getSession().getServletContext().getRealPath("/resources/data/pds/temp/") + file;
+		
+		File downFile = new File(downPathFile);
+		
+		String downFileName = new String(file.getBytes("UTF-8"), "8859_1");
+		response.setHeader("Content-Disposition", "attachment;filename=" + downFileName);
+		
+		FileInputStream fis = new FileInputStream(downFile);
+		ServletOutputStream sos = response.getOutputStream();
+		
+		byte[] buffer = new byte[2048];
+		int data = 0;
+		while((data = fis.read(buffer, 0, buffer.length)) != -1) {
+			sos.write(buffer, 0, data);
+		}
+		sos.flush();
+		sos.close();
+		fis.close();
+		
+		// 다운로드 완료후 temp폴더의 모든 파일들을 삭제처리한다.??????
+		// downFile.delete();
+	}
 }

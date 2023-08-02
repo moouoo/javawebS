@@ -8,7 +8,7 @@ public class BoardReplyVO {
 	private int boardIdx;
 	private String mid;
 	private String nickName;
-	private String WDate;
+	private String wDate;
 	private String hostIp;
 	private String content;
 	private int groupId;

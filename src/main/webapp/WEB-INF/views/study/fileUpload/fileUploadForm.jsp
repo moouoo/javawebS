@@ -126,7 +126,7 @@
             (${extName})
           </td>
           <td>
-            <input type="button" value="다운로드" onclick="location.href='${ctp}/study/fileUpload/fileDownAction?file=${file }';" class="btn btn-success btn-sm"/>
+            <input type="button" value="다운로드" onclick="location.href='${ctp}/study/fileUpload/fileDownAction?file=${file}';" class="btn btn-success btn-sm"/>
             <input type="button" value="삭제" onclick="fileDelete('${file}')" class="btn btn-danger btn-sm"/>
           </td>
         </tr>

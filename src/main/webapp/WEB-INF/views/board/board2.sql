@@ -8,7 +8,40 @@ create table board2 (
 	email		varchar(50),							/* 이메일 주소 */
 	homePage varchar(50),							/* 홈페이지(개인블로그) 주소 */
 	content text not null,						/* 게시글 내용 */
-	readNum int default 0,						/* 글 조회수 */
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	hostIp  varchar(40) not null,			/* 글 올린이의 IP */
 	openSw  char(2)	default 'OK',			/* 게시글 공개여부(OK:공개,NO:비공개) */
 	wDate   datetime  default now(),		/* 글 올린 날짜/시간 */
@@ -31,8 +64,8 @@ create table board2Reply (
   wDate		datetime default now(),				/* 댓글 올린 날짜 */
   hostIp  varchar(50)  not null,				/* 댓글 올린 PC의 고유 IP */
   content text not null,								/* 댓글 내용 */
-  groupId int default 0,						/* 그룹ID(같은 댓글끼리의 그룹아이디는 같다) */
-  level int default 0,							/* 대댓글의 구분을 위한 level(원본글의 댓글은 0, 대댓글은 1,2,3.. */
+  groupId int default 0,								/* 그룹 ID(같은 댓글끼리의 그룹아이디는 같다) */
+  level		int default 0,								/* 대댓글의 구분을 위한 level(원본글의 댓글은 0, 대댓글은 1,2,3,....) */
   primary key(idx),											/* 기본키 : 고유번호 */
   foreign key(boardIdx) references board2(idx)		/* 외래키 설정 */
   on update cascade
@@ -102,11 +135,12 @@ select * from board2 where idx = 6;
 select idx,title from board2 where idx < 6 order by idx desc limit 1; /* 이전글 */
 select idx,title from board2 where idx > 6 limit 1;	/* 다음글 */
 
---<![CDATA[조건식]]> ???? -> mapper에서 확인!!
+/* <![CDATA[조건식]]> */
 select idx,title from board2 where idx in (
-	(select idx from board2 where idx < 6 order by idx desc limit 1),
-	(select idx from board2 where idx > 6 limit 1))
-	
+  (select idx from board2 where idx < 6 order by idx desc limit 1),
+  (select idx from board2 where idx > 6 limit 1));
+
+
 
 /* 게시판(board2) 리스트 글제목옆에 해당글의 댓글(board2Reply)수를 출력하시오 */
 

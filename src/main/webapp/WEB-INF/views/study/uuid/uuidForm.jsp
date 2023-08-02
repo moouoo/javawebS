@@ -5,6 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>uuidForm.jsp</title>
   <jsp:include page="/WEB-INF/views/include/bs4.jsp" />
   <script>
@@ -21,12 +22,11 @@
     			str += cnt + " : " + res + "<br/>";
     			$("#demo").html(str);
     		},
-    		error : function(){
-    			alert("전송오류");
+    		error : function() {
+    			alert("전송오류!");
     		}
     	});
     }
-    
   </script>
 </head>
 <body>
@@ -34,16 +34,16 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>UUID</h2>
+  <h2>UUID에 대하여</h2>
   <pre>
-  	UUID(Univerally Unique Identifier)란, 네트워크상에서 고유성이 보장되는 id를 만들기 위한 규약
-  	32자리의 16진수(128bit)로 표현된다.
-  	표시 : 8-4-4-4-12 자리로 표현한다.
-  	예 : 262832ad-54ea-cfbf-acbf-125efd3464ha
+    UUID(Univerally Unique Identifier)란, 네트워크상에서 고유성이 보장되는 id를 만들기 위한 규약
+    32자리의 16진수(128Bit)로 표현된다.
+    표시 : 8-4-4-4-12 자리로 표현한다.
+    예 : 523532ad-52ed-fjsf-1ee5-242e7e149145
   </pre>
   <hr/>
   <p>
-    <input type="button" value="UUID" onclick="uuidCheck()" class="btn btn-success" />
+    <input type="button" value="UUID생성" onclick="uuidCheck()" class="btn btn-success" />
     <input type="button" value="다시하기" onclick="location.reload()" class="btn btn-primary" />
   </p>
   <hr/>

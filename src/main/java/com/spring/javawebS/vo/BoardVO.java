@@ -28,5 +28,4 @@ public class BoardVO {
 	
 	private int replyCount;		// 댓글의 개수를 저장하기위한필드
 	
-
 }

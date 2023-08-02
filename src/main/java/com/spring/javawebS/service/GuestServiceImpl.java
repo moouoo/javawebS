@@ -38,7 +38,6 @@ public class GuestServiceImpl implements GuestService {
 
 	@Override
 	public int setGuestDelete(int idx) {
-		
 		return guestDAO.setGuestDelete(idx);
 	}
 	

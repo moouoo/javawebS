@@ -3,11 +3,11 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
+	<title>Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<title>Home</title>
 	<style>
 		body {font-family: "Lato", sans-serif}
 		.mySlides {display: none}
@@ -15,13 +15,13 @@
 	
 </head>
 <body>
-<!-- 메뉴... -->
+<!-- 메뉴(nav)... -->
 <jsp:include page="/WEB-INF/views/include/nav.jsp" />
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-<!-- slide show -->
+<!-- Slide Show -->
 <jsp:include page="/WEB-INF/views/include/slide.jsp" />
 
   <!-- The Band Section -->

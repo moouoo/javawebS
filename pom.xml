@@ -117,7 +117,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!--  pom.xml에 의존성추가(DI) -->
     <!-- Lombok 라이브러리 -->
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
@@ -127,13 +126,13 @@
       <scope>provided</scope>
     </dependency>
     
-    <!-- backend 체크를 위한 validator라이브러리 추가(data검증:유효성검사) -->
-    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
-	<dependency>
+    <!-- Backend 체크를 위한 validator라이브러리 추가(data검증:유효성검사) -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
 	    <groupId>org.hibernate.validator</groupId>
 	    <artifactId>hibernate-validator</artifactId>
 	    <version>6.2.0.Final</version>
-	</dependency>
+		</dependency>
 
     
 
@@ -163,75 +162,104 @@
       <version>2.0.6</version>
     </dependency>
 
-<!-- spring Security을 위한 라이브러리 3개(같은 버전으로 가져와야 한다.) -->
-<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-core</artifactId>
-		<version>4.2.3.RELEASE</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		 <artifactId>spring-security-web</artifactId>
-		 <version>4.2.3.RELEASE</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
-	<dependency>
-		<groupId>org.springframework.security</groupId>
-		<artifactId>spring-security-config</artifactId>
-		<version>4.2.3.RELEASE</version>
-	</dependency>
-
-	<!-- ajax처리를 위한 라이브러리 2개 -->
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-	<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.14.2</version>
+    <!-- Spring Security를 위한 라이브러리(3개) -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>4.2.3.RELEASE</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>4.2.3.RELEASE</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>4.2.3.RELEASE</version>
+    </dependency>
+    
+    <!-- aJax처리를 위한 라이브러리(2개) -->
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.14.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
 		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.9.13</version>
+	    <groupId>org.codehaus.jackson</groupId>
+	    <artifactId>jackson-mapper-asl</artifactId>
+	    <version>1.9.13</version>
 		</dependency>
-		       
-	<!-- SMTP를 이용한 Java Web mail 서비스 라이브러리 주입(2개) -->		       
- 	<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-	<dependency>
+		
+		<!-- SMTP를 이용한 Java Web Mail 서비스 라이브러리 주입(2개) -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
 	    <groupId>javax.mail</groupId>
 	    <artifactId>mail</artifactId>
 	    <version>1.4.7</version>
-	</dependency>
- 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
-	<dependency>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context-support</artifactId>
 	    <version>5.3.18</version>
-	</dependency>
-	
-	<!-- 파일 업로드를 위한 라이브러리(2개) : commons -->
-	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-	<dependency>
+		</dependency>
+		
+		<!-- 파일 업로드를 위한 라이브러리(2개) : commons -->
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
 	    <groupId>commons-io</groupId>
 	    <artifactId>commons-io</artifactId>
 	    <version>2.11.0</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-	<dependency>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
 	    <groupId>commons-fileupload</groupId>
 	    <artifactId>commons-fileupload</artifactId>
-	    <version>1.5</version>
-	</dependency>
-	
-	
-	
-	
-	
-	
- 	
- 	
+	    <version>1.4</version>
+		</dependency>
+		
+		<!-- QR code 생성을 위한 라이브러리(zxing javase) -->
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+		<dependency>
+	    <groupId>com.google.zxing</groupId>
+	    <artifactId>javase</artifactId>
+	    <version>3.5.0</version>
+		</dependency>
+		
+		<!-- 랜덤한 문자와 숫자를 생성하는 라이브러리 지원... -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.12.0</version>
+		</dependency>
+		
+		<!-- 썸네일 이미지를 위한 라이브러리(thumbnailator) -->
+		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+		<dependency>
+	    <groupId>net.coobird</groupId>
+	    <artifactId>thumbnailator</artifactId>
+	    <version>0.4.19</version>
+		</dependency>
+		
+		<!-- 트랜잭션처리를 위한 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>4.3.14.RELEASE</version>
+		</dependency>
+
+		
+		
+		
+		      
 	</dependencies>
     <build>
         <plugins>

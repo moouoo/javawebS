@@ -29,16 +29,36 @@
 	      <button class="w3-padding-large w3-button" title="More">Study2 <i class="fa fa-caret-down"></i></button>     
 	      <div class="w3-dropdown-content w3-bar-block w3-card-4">
 	        <a href="${ctp}/study/validator/validatorList" class="w3-bar-item w3-button">validator연습</a>
+	        <a href="${ctp}/study/kakaomap/kakaomap" class="w3-bar-item w3-button">Kakao Map</a>
+	        <a href="${ctp}/study/qrCode/qrCodeForm" class="w3-bar-item w3-button">QR Code연습</a>
+	        <a href="${ctp}/study/captcha/captchaForm" class="w3-bar-item w3-button">캡차 연습</a>
+	        <a href="${ctp}/study/thumbnail/thumbnailForm" class="w3-bar-item w3-button">썸네일 연습</a>
+	        <a href="${ctp}/errorPage/errorMain" class="w3-bar-item w3-button">error 연습</a>
+	        <a href="${ctp}/study/transaction/transaction" class="w3-bar-item w3-button">트랜잭션 연습</a>
+	        <a href="${ctp}/study/chart/chart" class="w3-bar-item w3-button">Goggle 차트연습</a>
+	        <a href="${ctp}/study/chart2/chart" class="w3-bar-item w3-button">Goggle 차트연습2</a>
+	      </div>
+	    </div>
+	    <div class="w3-dropdown-hover w3-hide-small">
+	      <button class="w3-padding-large w3-button" title="More">미니쇼핑몰 <i class="fa fa-caret-down"></i></button>     
+	      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+	        <a href="${ctp}/dbShop/dbProductList" class="w3-bar-item w3-button">상품리스트</a>
+	        <a href="${ctp}/dbShop/dbCartList" class="w3-bar-item w3-button">장바구니</a>
+	        <a href="${ctp}/dbShop/dbMyOrder" class="w3-bar-item w3-button">주문(배송)현황</a>
+	        <a href="${ctp}/study/merchant/merchant" class="w3-bar-item w3-button">결재연습</a>
+	        <a href="${ctp}/" class="w3-bar-item w3-button">QnA</a>
+	        <a href="${ctp}/" class="w3-bar-item w3-button">1:1문의</a>
 	      </div>
 	    </div>
 	    <div class="w3-dropdown-hover w3-hide-small">
 	      <button class="w3-padding-large w3-button" onclick="location.href='${ctp}/member/memberMain';" title="More">MyPage <i class="fa fa-caret-down"></i></button>     
 	      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+	        <a href="${ctp}/schedule/schedule" class="w3-bar-item w3-button">일정관리</a>
 	        <a href="${ctp}/member/memberList" class="w3-bar-item w3-button">회원리스트</a>
 	        <a href="${ctp}/member/memberPwdUpdate?pwdFlag=member" class="w3-bar-item w3-button">비밀번호변경</a>
 	        <a href="${ctp}/member/memberPwdCheck" class="w3-bar-item w3-button">정보수정</a>
 	        <a href="javascript:memberDelete()" class="w3-bar-item w3-button">회원탈퇴</a>
-	        <c:if test="${sLevel==0}"><a href="${ctp}/admin/adminMenu" class="w3-bar-item w3-button">관리자</a></c:if>
+	        <c:if test="${sLevel==0}"><a href="${ctp}/admin/adminMain" class="w3-bar-item w3-button">관리자</a></c:if>
 	      </div>
 	    </div>
     </c:if>

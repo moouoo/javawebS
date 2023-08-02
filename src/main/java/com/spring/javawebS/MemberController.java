@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.spring.javawebS.pagInation.PageProcess;
-import com.spring.javawebS.pagInation.PageVO;
+import com.spring.javawebS.pagination.PageProcess;
+import com.spring.javawebS.pagination.PageVO;
 import com.spring.javawebS.service.MemberService;
 import com.spring.javawebS.vo.MemberVO;
 

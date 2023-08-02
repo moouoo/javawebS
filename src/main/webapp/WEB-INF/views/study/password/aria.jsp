@@ -5,7 +5,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ara.jsp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>aria.jsp</title>
   <jsp:include page="/WEB-INF/views/include/bs4.jsp" />
   <script>
     'use strict';
@@ -35,9 +36,10 @@
 <div class="container">
   <h2>ARIA</h2>
   <p>
-    ARIA 암호화 방식은 경령환경 및 하드웨어 구현을 위해 최적화된 알고리즘으로, Involutional SPPN 구조를 갖는 범용블록 암호화 알고리즘이다.<br/>
-    ARIA가 사용하는 연산은 대부분 XOR과 같은 단순한 바이트단위연산으로, 블록크기는 128bit(총 비트수: 256bit=32문자)이다.<br/>
-    ARIA는 Academy(학계), Research Institute(연구소), Agency(정부기관)의 첫 글자를 따서 만들었다.<br />
+    ARIA암호화 방식은 경령환경 및 하드웨어 구현을 위해 최적화된 알고리즘으로, Involutional SPN 구조를 갖는 범용블록 암호화 알고리즘이다.
+    ARIA가 사용하는 연산은 대부분 XOR과 같은 단순한 바이트단위연산으로, 블록크기는 128bit(총비트수:256bit=32문자)이다.<br/>
+    ARIA는 Academy(학계), Research Institute(연구소), Agency(정부기관)의 첫글자를 따서 만들었다.<br/>
+    ARIA암호화는 복호화가 가능하다.
   </p>
   <hr/>
   <p>

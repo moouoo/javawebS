@@ -13,10 +13,10 @@ public class MessageController {
 	@RequestMapping(value = "/message/{msgFlag}", method = RequestMethod.GET)
 	public String listGet(@PathVariable String msgFlag,
 			@RequestParam(name="mid", defaultValue = "", required=false) String mid,
+			@RequestParam(name="temp", defaultValue = "", required=false) String temp,
 			@RequestParam(name="idx", defaultValue = "0", required=false) int idx,
 			@RequestParam(name="pag", defaultValue = "1", required=false) int pag,
 			@RequestParam(name="pageSize", defaultValue = "5", required=false) int pageSize,
-			@RequestParam(name="temp", defaultValue = "", required=false) String temp,
 			Model model) {
 		
 		if(msgFlag.equals("guestInputOk")) {
@@ -192,18 +192,61 @@ public class MessageController {
 			model.addAttribute("url", "/study/validator/validatorList");
 		}
 		else if(msgFlag.equals("validatorError")) {
-			model.addAttribute("msg", "등록실패, "+temp+" 확인하세요!");
+			model.addAttribute("msg", "등록 실패~~ "+temp+"를 확인하세요...");
 			model.addAttribute("url", "/study/validator/validatorForm");
 		}
 		else if(msgFlag.equals("pdsInputOk")) {
-			model.addAttribute("msg", "파일이 업로드되엇습니다.");
+			model.addAttribute("msg", "파일이 업로드 되었습니다.");
 			model.addAttribute("url", "/pds/pdsList");
 		}
 		else if(msgFlag.equals("pdsInputNo")) {
-			model.addAttribute("msg", "파일 업로드 실패.");
+			model.addAttribute("msg", "파일 업로드 실패~~");
 			model.addAttribute("url", "/pds/pdsInput");
 		}
-		
+		else if(msgFlag.equals("dbProductInputOk")) {
+			model.addAttribute("msg", "상품이 등록되었습니다.");
+			model.addAttribute("url", "/dbShop/dbShopList");
+		}
+		else if(msgFlag.equals("dbOptionInputOk")) {
+			model.addAttribute("msg", "옵션 항목이 등록되었습니다.");
+			model.addAttribute("url", "/dbShop/dbOption");
+		}
+		else if(msgFlag.equals("dbOptionInput2Ok")) {
+			model.addAttribute("msg", "옵션 항목이 등록되었습니다.");
+			model.addAttribute("url", "/dbShop/dbOption2?productName="+temp);
+		}
+		else if(msgFlag.equals("thumbnailCreateOk")) {
+			model.addAttribute("msg", "썸네일 이미지가 생성되었습니다.");
+			model.addAttribute("url", "/study/thumbnail/thumbnailResult");
+		}
+		else if(msgFlag.equals("thumbnailCreateNo")) {
+			model.addAttribute("msg", "썸네일 이미지 생성 실패~~");
+			model.addAttribute("url", "/study/thumbnail/thumbnailForm");
+		}
+		else if(msgFlag.equals("cartOrderOk")) {
+			model.addAttribute("msg", "장바구니에 상품이 등록되었습니다.\\n주문창으로 이동합니다.");
+			model.addAttribute("url", "/dbShop/dbCartList");
+		}
+		else if(msgFlag.equals("cartInputOk")) {
+			model.addAttribute("msg", "장바구니에 상품이 등록되었습니다.\\n즐거운 쇼핑되세요.");
+			model.addAttribute("url", "/dbShop/dbProductList");
+		}
+		else if(msgFlag.equals("cartEmpty")) {
+			model.addAttribute("msg", "장바구니가 비어있습니다.");
+			model.addAttribute("url", "/dbShop/dbProductList");
+		}
+		else if(msgFlag.equals("paymentResultOk")) {
+			model.addAttribute("msg", "결제가 정상적으로 완료되었습니다.");
+			model.addAttribute("url", "/dbShop/paymentResultOk");
+		}
+		else if(msgFlag.equals("transactionInput1Ok")) {
+			model.addAttribute("msg", "개별 회원 처리가 성공적으로 수행되었습니다.");
+			model.addAttribute("url", "/study/transaction/transactionList");
+		}
+		else if(msgFlag.equals("transactionInput2Ok")) {
+			model.addAttribute("msg", "회원 일괄 처리가 성공적으로 수행되었습니다.");
+			model.addAttribute("url", "/study/transaction/transactionList");
+		}
 		
 		
 		return "include/message";

@@ -5,6 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>sha256.jsp</title>
   <jsp:include page="/WEB-INF/views/include/bs4.jsp" />
   <script>

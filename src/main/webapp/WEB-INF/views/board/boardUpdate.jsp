@@ -52,19 +52,19 @@
       </tr>
       <tr>
         <th>글제목</th>
-        <td><input type="text" name="title" id="title" value="${vo.title }" placeholder="글제목을 입력하세요" autofocus required class="form-control"></td>
+        <td><input type="text" name="title" id="title" value="${vo.title}" placeholder="글제목을 입력하세요" autofocus required class="form-control"></td>
       </tr>
       <tr>
         <th>이메일</th>
-        <td><input type="text" name="email" id="email" value="${vo.email }" placeholder="이메일을 입력하세요" class="form-control"/></td>
+        <td><input type="text" name="email" id="email" value="${vo.email}" placeholder="이메일을 입력하세요" class="form-control"/></td>
       </tr>
       <tr>
         <th>홈페이지</th>
-        <td><input type="text" name="homePage" id="homePage" value="${vo.homePage }" placeholder="홈페이지를 입력하세요" class="form-control"/></td>
+        <td><input type="text" name="homePage" id="homePage" value="${vo.homePage}" placeholder="홈페이지를 입력하세요" class="form-control"/></td>
       </tr>
       <tr>
         <th>글내용</th>
-        <td><textarea rows="6" name="content" id="CKEDITOR" class="form-control" required>${vo.content }</textarea></td>
+        <td><textarea rows="6" name="content" id="CKEDITOR" class="form-control" required>${vo.content}</textarea></td>
         <script>
         CKEDITOR.replace("content",{
         	height:480,
@@ -82,7 +82,7 @@
       </tr>
       <tr>
         <td colspan="2" class="text-center">
-          <input type="button" value="글올리기" onclick="fCheck()" class="btn btn-primary"/> &nbsp;
+          <input type="button" value="글수정하기" onclick="fCheck()" class="btn btn-primary"/> &nbsp;
           <input type="reset" value="다시입력" class="btn btn-warning"/> &nbsp;
           <input type="button" value="돌아가기" onclick="location.href='${ctp}/board/boardList?pag=${pag}&pageSize=${pageSize}';" class="btn btn-secondary"/>
         </td>

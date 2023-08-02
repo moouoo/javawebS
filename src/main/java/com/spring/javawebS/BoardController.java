@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.http.UserDetailsServiceFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.javawebS.pagInation.PageProcess;
-import com.spring.javawebS.pagInation.PageVO;
+import com.spring.javawebS.pagination.PageProcess;
+import com.spring.javawebS.pagination.PageVO;
 import com.spring.javawebS.service.BoardService;
 import com.spring.javawebS.vo.BoardReplyVO;
 import com.spring.javawebS.vo.BoardVO;
@@ -321,7 +322,7 @@ public class BoardController {
 		replyVO.setLevel(replyVO.getLevel()+1);
 		boardService.setBoardReplyInput(replyVO);
 		
-		return "1";
+		return "";
 	}
 	
 	// 댓글 삭제하기

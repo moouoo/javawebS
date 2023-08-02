@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -23,6 +25,8 @@
 	<resources mapping="/ckeditor/**" location="/resources/ckeditor/" />
 	<resources mapping="/data/**" location="/resources/data/" />
 	<resources mapping="/pds/**" location="/resources/data/pds/" />
+	<resources mapping="/dbShop/**" location="/resources/data/dbShop/" />
+
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,60 +36,60 @@
 	
 	<context:component-scan base-package="com.spring.javawebS" />
 	
-	<!-- BCryptPasswordEncoder 객체를 위한 Bean 등록 -->
-  	<beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
-	<!-- 파일업로드에 필요한 라이브러리를 Bean으로 등록(업로드 최대용량제한 : 20MByte) -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
-		<beans:property name="maxUploadSize" value="20971520" />
-		<beans:property name="defaultEncoding" value="utf-8" />
-	</beans:bean>
+	<!-- BCryptPasswordEncoder 객체를 위한 Bean 등록 -->
+  <beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+  
+  <!-- 파일업로드에 필요한 라이브러리를 Bean으로 등록(업로드 최대용량제한 : 20MByte) -->
+  <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  	<beans:property name="maxUploadSize" value="20971520" />
+  	<beans:property name="defaultEncoding" value="utf-8" />
+  </beans:bean>
 	
 	<!-- Interceptor 설정 -->
 	<beans:bean id="level0Interceptor" class="com.spring.javawebS.interceptor.Level0Interceptor" />
 	<beans:bean id="level1Interceptor" class="com.spring.javawebS.interceptor.Level1Interceptor" />
 	<beans:bean id="level2Interceptor" class="com.spring.javawebS.interceptor.Level2Interceptor" />
 	<beans:bean id="level3Interceptor" class="com.spring.javawebS.interceptor.Level3Interceptor" />
-
 	<!--
-		관리자는 /admin으로 들어갔을경우 허용. 
-		기본은 board는 정회원부터 허용. 단, boardList는 준회원은 허용
-		기본은 pds는 우수회원부터 허용. 단, pdsList, pdsDownload는 정회원까지 허용
-	 -->
+	  관리자는 /admin으로 들어왔을경우에만 허용.
+	  기본은 board는 정회원부터 허용, 단 boardList는 준회원 허용
+	  기본은 pds는 우수회원부터 허용,  단 pdsList,pdsDownload는 정회원까지 허용 
+	-->
 	<interceptors>
-		<interceptor>
-			<mapping path="/admin/**" />
-			<beans:ref bean="level0Interceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/member/**" />
-			<mapping path="/board/boardList" />
-			<exclude-mapping path="/member/memberLogin" />
-			<exclude-mapping path="/member/memberLogout" />
-			<exclude-mapping path="/member/memberJoin" />
-			<exclude-mapping path="/member/memberIdCheck" />
-			<exclude-mapping path="/member/memberNickCheck" />
-			<exclude-mapping path="/member/memberPwdFind" />
-			<exclude-mapping path="/member/memberIdFind" />
-			<beans:ref bean="level3Interceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/study/**" />
-			<mapping path="/board/**" />
-			<mapping path="/pds/pdsList" />
-			<mapping path="/pds/pdsDownlia" />
-			<exclude-mapping path="/board/boardList" />
-			<beans:ref bean="level2Interceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/pds/**" />
-			<exclude-mapping path="/pds/pdsList" />
-			<exclude-mapping path="/pds/pdsDownlia" />
-			<beans:ref bean="level1Interceptor" />
-		</interceptor>
+	  <interceptor>
+	    <mapping path="/admin/**"/>
+	    <beans:ref bean="level0Interceptor" />
+	  </interceptor>
+	  <interceptor>
+	    <mapping path="/member/**"/>
+	    <mapping path="/board/boardList" />
+	    <exclude-mapping path="/member/memberLogin" />
+	    <exclude-mapping path="/member/memberLogout" />
+	    <exclude-mapping path="/member/memberJoin" />
+	    <exclude-mapping path="/member/memberIdCheck" />
+	    <exclude-mapping path="/member/memberNickCheck" />
+	    <exclude-mapping path="/member/memberIdFind" />
+	    <exclude-mapping path="/member/memberPwdFind" />
+	    <beans:ref bean="level3Interceptor" />
+	  </interceptor>
+	  <interceptor>
+	    <mapping path="/study/**"/>
+	    <mapping path="/board/**"/>
+	    <mapping path="/pds/pdsList"/>
+	    <mapping path="/pds/pdsDownload"/>
+	    <exclude-mapping path="/board/boardList" />
+	    <beans:ref bean="level2Interceptor" />
+	  </interceptor>
+	  <interceptor>
+	    <mapping path="/pds/**"/>
+	    <exclude-mapping path="/pds/pdsList" />
+	    <exclude-mapping path="/pds/pdsDownload" />
+	    <beans:ref bean="level1Interceptor" />
+	  </interceptor>
 	</interceptors>
 	
-	
-	
+	<!-- 트래잭션을 어노테이션으로 처리하기위해 참조하는 클래스를 등록시켜준다. -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 </beans:beans>
